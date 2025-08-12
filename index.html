@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca de Mangás - Berserk</title>
+    <style>
+        :root {
+            --bg-color: #1a1a1a;
+            --card-bg: #2a2a2a;
+            --text-color: #e0e0e0;
+            --secondary-text: #aaaaaa;
+            --accent-color: #c62828;
+            --border-color: #333333;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .title {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            color: var(--secondary-text);
+            margin-bottom: 20px;
+        }
+        
+        .manga-info {
+            max-width: 800px;
+            margin: 0 auto 30px;
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .info-item {
+            margin-bottom: 5px;
+        }
+        
+        .info-label {
+            font-weight: 600;
+            color: var(--accent-color);
+            font-size: 14px;
+        }
+        
+        .info-value {
+            font-size: 15px;
+        }
+        
+        .synopsis {
+            font-size: 15px;
+            line-height: 1.7;
+            margin-top: 15px;
+            color: var(--secondary-text);
+        }
+        
+        .library-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--accent-color);
+        }
+        
+        .chapters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+            padding: 10px;
+        }
+        
+        .chapter-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            color: inherit;
+            border: 1px solid var(--border-color);
+        }
+        
+        .chapter-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+        
+        .cover-container {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            background-color: #1a1a1a;
+        }
+        
+        .chapter-cover {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        .chapter-card:hover .chapter-cover {
+            transform: scale(1.03);
+        }
+        
+        .no-cover {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--secondary-text);
+            font-size: 14px;
+            background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+        }
+        
+        .chapter-info {
+            padding: 14px;
+        }
+        
+        .chapter-name {
+            font-size: 15px;
+            font-weight: 500;
+            margin-bottom: 3px;
+            color: var(--text-color);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .chapter-number {
+            font-size: 13px;
+            color: var(--secondary-text);
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            color: var(--secondary-text);
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .chapters-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 15px;
+            }
+            
+            .cover-container {
+                height: 200px;
+            }
+            
+            .title {
+                font-size: 28px;
+            }
+            
+            .manga-info {
+                padding: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .chapters-grid {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+                gap: 12px;
+            }
+            
+            .cover-container {
+                height: 180px;
+            }
+            
+            .chapter-info {
+                padding: 12px;
+            }
+            
+            .chapter-name {
+                font-size: 14px;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1 class="title">Berserk</h1>
+        <p class="subtitle">Idade de Ouro</p>
+    </div>
+    
+    <div class="manga-info">
+        <div class="info-grid">
+            <div class="info-item">
+                <div class="info-label">Autor</div>
+                <div class="info-value">Kentaro Miura</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Ano</div>
+                <div class="info-value">1989-2021</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Gênero</div>
+                <div class="info-value">Dark Fantasy, Ação, Horror</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Status</div>
+                <div class="info-value">Em publicação (póstumo)</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Volumes</div>
+                <div class="info-value">41 volumes (até 2021)</div>
+            </div>
+        </div>
+        
+        <div class="synopsis">
+            <div class="info-label">Sinopse</div>
+            <p>Berserk segue a história de Guts, um solitário mercenário marcado por um destino trágico. Em um mundo sombrio inspirado na Europa medieval, Guts luta contra demônios, apostas cósmicas e sua própria humanidade enquanto busca vingança contra seu antigo amigo Griffith, que o traiu de maneira horrível.</p>
+        </div>
+    </div>
+    
+    <div class="library-container">
+        <h2 class="section-title">Capítulos Disponíveis (8)</h2>
+        <div class="chapters-grid">
+
+            <a href="Berserk_–_Capítulo_0.09_–_Idade_de_Ouro_(1)_–_Manga_Livre_capitulo_1/leitor.html" class="chapter-card">
+                <div class="cover-container">
+                    <img src="Berserk_–_Capítulo_0.09_–_Idade_de_Ouro_(1)_–_Manga_Livre_capitulo_1/pages/page_002.png" class="chapter-cover" alt="Capa">
+                </div>
+                <div class="chapter-info">
+                    <h3 class="chapter-name">Berserk –</h3>
+                    <p class="chapter-number">Capítulo 1</p>
+                </div>
+            </a>
+
+            <a href="Berserk_–_Capítulo_0.10_–_Idade_de_Ouro_(2)_–_Manga_Livre_capitulo_2/leitor.html" class="chapter-card">
+                <div class="cover-container">
+                    <img src="Berserk_–_Capítulo_0.10_–_Idade_de_Ouro_(2)_–_Manga_Livre_capitulo_2/pages/page_002.png" class="chapter-cover" alt="Capa">
+                </div>
+                <div class="chapter-info">
+                    <h3 class="chapter-name">Berserk –</h3>
+                    <p class="chapter-number">Capítulo 2</p>
+                </div>
+            </a>
+
+            <a href="Berserk_–_Capítulo_0.11_–_Idade_de_Ouro_(3)_–_Manga_Livre_capitulo_3/leitor.html" class="chapter-card">
+                <div class="cover-container">
+                    <img src="Berserk_–_Capítulo_0.11_–_Idade_de_Ouro_(3)_–_Manga_Livre_capitulo_3/pages/page_002.png" class="chapter-cover" alt="Capa">
+                </div>
+                <div class="chapter-info">
+                    <h3 class="chapter-name">Berserk –</h3>
+                    <p class="chapter-number">Capítulo 3</p>
+                </div>
+            </a>
+
+            <a href="Berserk_–_Capítulo_0.12_–_Idade_de_Ouro_(4)_–_Manga_Livre_capitulo_4/leitor.html" class="chapter-card">
+                <div class="cover-container">
+                    <img src="Berserk_–_Capítulo_0.12_–_Idade_de_Ouro_(4)_–_Manga_Livre_capitulo_4/pages/page_002.png" class="chapter-cover" alt="Capa">
+                </div>
+                <div class="chapter-info">
+                    <h3 class="chapter-name">Berserk –</h3>
+                    <p class="chapter-number">Capítulo 4</p>
+                </div>
+            </a>
+
+            <a href="Berserk_–_Capítulo_0.13_–_Idade_de_Ouro_(5)_–_Manga_Livre_capitulo_5/leitor.html" class="chapter-card">
+                <div class="cover-container">
+                    <img src="Berserk_–_Capítulo_0.13_–_Idade_de_Ouro_(5)_–_Manga_Livre_capitulo_5/pages/page_002.png" class="chapter-cover" alt="Capa">
+                </div>
+                <div class="chapter-info">
+                    <h3 class="chapter-name">Berserk –</h3>
+                    <p class="chapter-number">Capítulo 5</p>
+                </div>
+            </a>
+
+            <a href="Berserk_–_Capítulo_0.14_–_Idade_de_Ouro_(6)_–_Manga_Livre_capitulo_6/leitor.html" class="chapter-card">
+                <div class="cover-container">
+                    <img src="Berserk_–_Capítulo_0.14_–_Idade_de_Ouro_(6)_–_Manga_Livre_capitulo_6/pages/page_002.png" class="chapter-cover" alt="Capa">
+                </div>
+                <div class="chapter-info">
+                    <h3 class="chapter-name">Berserk –</h3>
+                    <p class="chapter-number">Capítulo 6</p>
+                </div>
+            </a>
+
+            <a href="Berserk_–_Capítulo_0.15_–_Idade_de_Ouro_(7)_–_Manga_Livre_capitulo_7/leitor.html" class="chapter-card">
+                <div class="cover-container">
+                    <img src="Berserk_–_Capítulo_0.15_–_Idade_de_Ouro_(7)_–_Manga_Livre_capitulo_7/pages/page_002.png" class="chapter-cover" alt="Capa">
+                </div>
+                <div class="chapter-info">
+                    <h3 class="chapter-name">Berserk –</h3>
+                    <p class="chapter-number">Capítulo 7</p>
+                </div>
+            </a>
+
+            <a href="Berserk_–_Capítulo_0.16_–_Idade_de_Ouro_(8)_–_Manga_Livre_capitulo_8/leitor.html" class="chapter-card">
+                <div class="cover-container">
+                    <img src="Berserk_–_Capítulo_0.16_–_Idade_de_Ouro_(8)_–_Manga_Livre_capitulo_8/pages/page_002.png" class="chapter-cover" alt="Capa">
+                </div>
+                <div class="chapter-info">
+                    <h3 class="chapter-name">Berserk –</h3>
+                    <p class="chapter-number">Capítulo 8</p>
+                </div>
+            </a>
+
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>Biblioteca de Mangás • Berserk © Kentaro Miura / Hakusensha</p>
+    </div>
+</body>
+</html>
